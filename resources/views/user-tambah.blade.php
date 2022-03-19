@@ -1,10 +1,10 @@
 @extends('layouts.master')
 @section('link')
-<li class="menu-header">Dashboard</li>
+<li class="menu-header">Paket</li>
 <li ><a class="nav-link" href="{{route ('dashboard')}}"><i class="fas fa-tachometer-alt"></i> <span>Dashboard</span></a></li>
 <li class="menu-header">Content</li>
 @if (auth()->user()->role=="admin") 
-<li ><a class="nav-link" href="{{route ('tampil-outlet')}}"><i class="fas fa-home"></i> <span>Outlet</span></a></li>
+<li class="active"><a class="nav-link" href="{{route ('tampil-outlet')}}"><i class="fas fa-home"></i> <span>Outlet</span></a></li>
 <li ><a class="nav-link" href="{{route ('tampil-paket')}}"><i class="fas fa-box"></i> <span>Paket Laundry</span></a></li>
 @endif
 <li ><a class="nav-link" href="{{route ('tampil-member')}}"><i class="fas fa-user"></i> <span>Member</span></a></li>
@@ -15,6 +15,7 @@
 @stop
 @section('content')
     <div class="section-body">
+      <div class="container-fluid py-4">
         <div class="row">
             <div class="col-12 col-md-12 col-lg-12">
                 <div class="row">
@@ -87,6 +88,7 @@
                           
                           <button class="btn btn-primary" type="submit">Tambah</button>
                           <button class="btn btn-secondary" type="reset">Reset</button>
+                          <a href="{{route('tampil-user')}}" class="btn btn-danger">Back</a>
                         
                         </form>
                   </div>

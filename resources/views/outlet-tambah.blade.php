@@ -1,6 +1,6 @@
 @extends('layouts.master')
 @section('link')
-<li class="menu-header">Dashboard</li>
+<li class="menu-header">Outlet</li>
 <li ><a class="nav-link" href="{{route ('dashboard')}}"><i class="fas fa-tachometer-alt"></i> <span>Dashboard</span></a></li>
 <li class="menu-header">Content</li>
 @if (auth()->user()->role=="admin") 
@@ -14,6 +14,7 @@
 @endif
 @stop
 @section('content')
+<div class="container-fluid py-4">
     <div class="section-body">
         <div class="row">
             <div class="col-12 col-md-12 col-lg-12">
@@ -73,7 +74,7 @@
                   </div>
             </div>
          </div>
-
+        </div>
     </div>
 @stop
 

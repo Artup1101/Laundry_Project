@@ -1,39 +1,24 @@
 @extends('layouts.master')
-@section('link')
-<li class="menu-header">Dashboard</li>
-<li ><a class="nav-link" href="{{route ('dashboard')}}"><i class="fas fa-tachometer-alt"></i> <span>Dashboard</span></a></li>
-<li class="menu-header">Content</li>
-@if (auth()->user()->role=="admin") 
-<li ><a class="nav-link" href="{{route ('tampil-outlet')}}"><i class="fas fa-home"></i> <span>Outlet</span></a></li>
-<li ><a class="nav-link" href="{{route ('tampil-paket')}}"><i class="fas fa-box"></i> <span>Paket Laundry</span></a></li>
-@endif
-<li class="active"><a class="nav-link" href="{{route ('tampil-member')}}"><i class="fas fa-user"></i> <span>Member</span></a></li>
-<li ><a class="nav-link" href="{{route ('tampil-transaksi')}}"><i class="fas fa-file-invoice-dollar"></i> <span>Transaksi</span></a></li>
-@if (auth()->user()->role=="admin") 
-<li ><a class="nav-link" href="{{route ('tampil-user')}}"><i class="fas fa-user-tie"></i> <span>Data Pengurus</span></a></li>
-@endif
+@section('navigasi')
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
+    <li class="breadcrumb-item text-sm"><a class="opacity-5 text-white" href="javascript:;">Pages</a></li>
+    <li class="breadcrumb-item text-sm text-white active" aria-current="page">Member</li>
+  </ol>
+  <h6 class="font-weight-bolder text-white mb-0">Data Member</h6>
+</nav>
 @stop
 @section('content')
 <div class="section-header">
-    <h1>Data Member</h1>
-    <div class="section-header-breadcrumb">
-      <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
-      <div class="breadcrumb-item"><a href="{{route ('tampil-member')}}">Member</a></div>
-      <div class="breadcrumb-item">Data Member</div>
-    </div>
-  </div>
+
     <div class="section-body">
         <div class="row">
             <div class="col-12 col-md-12 col-lg-12">
-                <a href="{{route('tambah-member')}}" class="btn btn-icon icon-left btn-primary"><i class="far fa-edit"></i> Tambah Data</a>
-                <hr>
+              <div class="container-fluid py-4">
                 {{-- message simpan data --}}
                 @if (session('message-simpan'))
                 <div class="alert alert-success alert-dismissible show fade">
                   <div class="alert-body">
-                    <button class="close" data-dismiss="alert">
-                      <span>×</span>
-                    </button>
                     {{(session('message-simpan'))}}
                   </div>
                 </div>
@@ -42,9 +27,6 @@
                 @if (session('message-update'))
                 <div class="alert alert-info alert-dismissible show fade">
                   <div class="alert-body">
-                    <button class="close" data-dismiss="alert">
-                      <span>×</span>
-                    </button>
                     {{(session('message-update'))}}
                   </div>
                 </div>
@@ -53,46 +35,75 @@
                 @if (session('message-hapus'))
                 <div class="alert alert-warning alert-dismissible show fade">
                   <div class="alert-body">
-                    <button class="close" data-dismiss="alert">
-                      <span>×</span>
-                    </button>
                     {{(session('message-hapus'))}}
                   </div>
                 </div>
+                </div>
                 @endif
-                <table class="table table-striped table-bordered">
-                  <tr>
-                    <th>No</th>
-                    <th>Nama Member</th>
-                    <th>Alamat</th>
-                    <th>Jenis Kelamin</th>
-                    <th>Nomor Telpon</th>
-                    <th>Aksi</th>
-                  </tr>
-                  
-                  @foreach ($member as $no => $data)
-                  <tr>
-                    <td>{{$member->firstItem()+$no}}</td>
-                    <td>{{$data->nama_member}}</td>
-                    <td>{{$data->alamat}}</td>
-                    <td>{{$data->jenis_kelamin}}</td>
-                    <td>{{$data->telp}}</td>
+                <div class="container-fluid py-4">
+                  <div class="row">
+                    <div class="col-12">
+                      <div class="card mb-4">
+                        <div class="card-header pb-0">
+                          <center>
+                            <h4>Data Member</h4>
+                          </center>
+                          <a href="{{route ('tambah-member')}}" class="btn btn-icon icon-left btn-primary"><i class="far fa-edit"></i> Tambah Data</a>
+                          
+                        </div>
+                        <div class="card-body px-0 pt-0 pb-2">
+                          <div class="table-responsive p-0">
+                            <table class="table align-items-center mb-0">
+                              <thead>
+                                <tr>
+                                  <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-10">No.</th>
+                                  <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-10 ps-2">Nama</th>
+                                  <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-10">Alamat</th>
+                                  <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-10">Jenis Kelamin</th>
+                                  <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-10">Telp</th>
+                                  <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-10">Aksi</th>
+                                  <th class="text-secondary opacity-10"></th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                @foreach($member as $no => $data) 
+                                <tr>
+                                  <td class="align-middle text-center text-sm">
+                                    <p class="text-s font-weight-bold mb-0">{{$i=$no+1, $i++}}</p>
+                                  </td>
+                                  <td class="text-center">
+                                    <span class="badge badge-sm bg-gradient-secondary ">{{$data->nama_member}}</span>
+                                  </td>
+                                  <td class="align-middle text-center text-sm">
+                                    <p class="text-xs font-weight-bold mb-0">{{$data->alamat}}</p>
+                                  </td>
+                                  <td class="align-middle text-center">
+                                    <span class="text-secondary text-xs font-weight-bold">{{$data->jenis_kelamin}}</span>
+                                  </td>
+                                  </td>
+                                  <td class="align-middle text-center">
+                                    <span class="text-secondary text-xs font-weight-bold">{{$data->telp}}</span>
+                                  </td>
+                                  <td class="align-middle text-center">
+                                    <a href="{{route('edit-member',$data->id)}}" class="btn btn-icon btn-success"><i class="far fa-edit"></i></a>
+                                    <a href= "#"data-id="{{$data->id}}" class="btn btn-icon btn-danger hapus"><i class="fas fa-times">
+                                     <form action="{{route('hapus-member',$data->id)}}" id="hapus{{$data->id}}"method="POST"> 
+                                        @csrf
+                                        @method('delete')
+                                    </form>
+                                  </i>
+                                  </a>
+                                  </td>
+                                </tr>
+                                @endforeach
+                              </tbody>
+                            </table>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
 
-                    <td>
-                      <a href="{{route('edit-member',$data->id)}}" class="btn btn-icon btn-primary"><i class="far fa-edit"></i></a>
-                      <a href="#" data-id="{{$data->id}}" class="btn btn-icon btn-danger hapus">
-                      <form action="{{route('hapus-member',$data->id)}}" id="hapus{{$data->id}}"method="POST">
-                      @csrf
-                      @method('delete')
-                      </form>
-                      <i class="fas fa-times"></i>
-                      </a>
-                    </td>
-                  </tr>
-                  @endforeach
-
-                </table>
-                {{$member->links()}}
             </div>
          </div>
 

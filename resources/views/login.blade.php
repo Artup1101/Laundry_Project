@@ -1,107 +1,99 @@
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
-  <title>{{config('app.name')}}</title>
-
-  <!-- General CSS Files -->
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-
-  <!-- CSS Libraries -->
-  <link rel="stylesheet" href="../node_modules/bootstrap-social/bootstrap-social.css">
-
-  <!-- Template CSS -->
-  <link rel="stylesheet" href="{{asset('assets/css/style.css')}}">
-  <link rel="stylesheet" href="{{asset('assets/css/components.css')}}">
-  <link rel="stylesheet" href="{{asset('assets/fontawesome/css/all.css')}}">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="apple-touch-icon" sizes="76x76" href="../assets2/img/apple-icon.png">
+  <link rel="icon" type="image/png" href="../assets2/img/favicon.png">
+  <title>
+    Login Laundrycuuu
+  </title>
+  <!--     Fonts and icons     -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
+  <!-- Nucleo Icons -->
+  <link href="../assets2/css/nucleo-icons.css" rel="stylesheet" />
+  <link href="../assets2/css/nucleo-svg.css" rel="stylesheet" />
+  <!-- Font Awesome Icons -->
+  <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+  <link href="../assets2/css/nucleo-svg.css" rel="stylesheet" />
+  <!-- CSS Files -->
+  <link id="pagestyle" href="../assets2/css/argon-dashboard.css?v=2.0.0" rel="stylesheet" />
 </head>
 
-<body>
-  <div id="app">
-    <section class="section">
-      <div class="container mt-5">
-        <div class="row">
-          <div class="col-12 col-sm-8 offset-sm-2 col-md-6 offset-md-3 col-lg-6 offset-lg-3 col-xl-4 offset-xl-4">
-            <div class="login-brand">
-              <img src="../assets/img/stisla-fill.svg" alt="logo" width="100" class="shadow-light rounded-circle">
-            </div>
-
-            <div class="card card-primary">
-              <div class="card-header"><h4>Login</h4></div>
-
-              <div class="card-body">
-                <form method="POST" action="{{route('login')}}" class="needs-validation" novalidate="">
+<body class="" style="background-color: #9400D3">
+  <div class="container position-sticky z-index-sticky top-0">
+    <div class="row">
+      <div class="col-12">
+      </div>
+    </div>
+  </div>
+  <main class="main-content  mt-0">
+    <section>
+      <div class="page-header min-vh-100">
+        <div class="container">
+          <div class="row">
+            <div class="col-xl-4 col-lg-5 col-md-7 d-flex flex-column mx-lg-0 mx-auto">
+              <div class="card ">
+                <div class="card-header pb-0 text-start">
+                  <h4 class="font-weight-bolder">Log In</h4>
+                  <p class="mb-0">Enter your email and password to Log In</p>
+                </div>
+                <div class="card-body">
+                  <form method="POST" action="{{route('login')}}" role="form">
                     @csrf
-                  <div class="form-group">
-                    <label for="email">Email</label>
-                    <input id="email" type="email" class="form-control" name="email" value="{{old('email')}}" tabindex="1" required autofocus>
-                    <div class="invalid-feedback">
-                      Please fill in your email
+                    <div class="mb-3">
+                      <input type="email" class="form-control form-control-lg" name="email" placeholder="Email" aria-label="Email">
                     </div>
-                  </div>
+                    <div class="mb-3">
+                      <input type="password" class="form-control form-control-lg" name="password" placeholder="Password" aria-label="Password">
+                    </div>
 
-                  <div class="form-group">
-                    <div class="d-block">
-                    	<label for="password" class="control-label">Password</label>
-                      <div class="float-right">
-                        <a href="auth-forgot-password.html" class="text-small">
-                          Forgot Password?
-                        </a>
-                      </div>
+                    @if(session('message'))
+                    <div class="text-danger">
+                      {{session('message')}}
                     </div>
-                    <input id="password" type="password" class="form-control" name="password" tabindex="2" required>
-                    <div class="invalid-feedback">
-                      please fill in your password
-                    </div>
-                    {{-- message hapus data --}}
-                @if (session('message'))
-                
-                  <div class="text-danger">
-                    {{(session('message'))}}
-                  </div>
                   @endif
-                  
-                  </div>
-
-                  {{-- <div class="form-group">
-                    <div class="custom-control custom-checkbox">
-                      <input type="checkbox" name="remember" class="custom-control-input" tabindex="3" id="remember-me">
-                      <label class="custom-control-label" for="remember-me">Remember Me</label>
+                    <div class="text-center">
+                      <button type="submit" class="btn btn-lg btn-lg w-100 mt-4 mb-0 text-white" style="background-color: #9400D3">Log in</button>
                     </div>
-                  </div> --}}
-
-                  <div class="form-group">
-                    <button type="submit" class="btn btn-primary btn-lg btn-block" tabindex="4">
-                      Login
-                    </button>
-                  </div>
-                </form>
-
+                  </form>
+                </div>
+               
+              </div>
+            </div>
+            <div class="col-6 d-lg-flex d-none h-100 my-auto pe-0 position-absolute top-0 end-0 text-center justify-content-center flex-column">
+              <div class="position-relative bg-gradient-primary h-100 m-3 px-7 border-radius-lg d-flex flex-column justify-content-center overflow-hidden" style="background-image: url('/assets2/img/mesin.jpg');
+          background-size: cover;">
+                <span class="mask bg-gradient-dark opacity-3"></span>
+                <h4 class="mt-5 text-white font-weight-bolder position-relative">"Attention is the new currency"</h4>
+                <p class="text-white position-relative">The more effortless the writing looks, the more effort the writer actually put into the process.</p>
               </div>
             </div>
           </div>
         </div>
       </div>
     </section>
-  </div>
-
-<!-- General JS Scripts -->
-<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.nicescroll/3.7.6/jquery.nicescroll.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
-<script src="{{asset('assets/js/stisla.js')}}"></script>
-
-  <!-- JS Libraies -->
-
-  <!-- Template JS File -->
-  <script src="{{asset('assets/js/scripts.js')}}"></script>
-  <script src="{{asset('assets/js/custom.js')}}"></script>
-
-  <!-- Page Specific JS File -->
+  </main>
+  <!--   Core JS Files   -->
+  <script src="../assets2/js/core/popper.min.js"></script>
+  <script src="../assets2/js/core/bootstrap.min.js"></script>
+  <script src="../assets2/js/plugins/perfect-scrollbar.min.js"></script>
+  <script src="../assets2/js/plugins/smooth-scrollbar.min.js"></script>
+  <script>
+    var win = navigator.platform.indexOf('Win') > -1;
+    if (win && document.querySelector('#sidenav-scrollbar')) {
+      var options = {
+        damping: '0.5'
+      }
+      Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
+    }
+  </script>
+  <!-- Github buttons -->
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+  <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
+  <script src="../assets2/js/argon-dashboard.min.js?v=2.0.0"></script>
 </body>
+
 </html>

@@ -20,14 +20,14 @@ class userSeeder extends Seeder
             [
             'name' => 'admin1',
             'role' => 'admin',
-            'email' => 'admin123@gmail.com',
+            'email' => 'admin@gmail.com',
             'password' => bcrypt('12345'),
             'remember_token' => Str::random(60),
             ],
             [
-                'name' => 'omencakep',
+                'name' => 'putra',
                 'role' => 'kasir',
-                'email' => 'omen212@gmail.com',
+                'email' => 'putra@gmail.com',
                 'password' => bcrypt('12345'),
                 'remember_token' => Str::random(60),
             ]

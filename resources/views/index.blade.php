@@ -1,180 +1,154 @@
 @extends('layouts.master')
-@section('link') 
-<li class="menu-header">Dashboard</li>
-<li class="active"><a class="nav-link" href="{{route ('dashboard')}}"><i class="fas fa-tachometer-alt"></i> <span>Dashboard</span></a></li>
-<li class="menu-header">Content</li>
-@if (auth()->user()->role=="admin") 
-<li ><a class="nav-link" href="{{route ('tampil-outlet')}}"><i class="fas fa-home"></i> <span>Outlet</span></a></li>
-<li ><a class="nav-link" href="{{route ('tampil-paket')}}"><i class="fas fa-box"></i> <span>Paket Laundry</span></a></li>
-@endif
-
-@if (auth()->user()->role != "owner") 
-<li ><a class="nav-link" href="{{route ('tampil-member')}}"><i class="fas fa-user"></i> <span>Member</span></a></li>
-@endif
-
-<li ><a class="nav-link" href="{{route ('tampil-transaksi')}}"><i class="fas fa-file-invoice-dollar"></i> <span>Transaksi</span></a></li>
-
-@if (auth()->user()->role=="admin") 
-<li ><a class="nav-link" href="{{route ('tampil-user')}}"><i class="fas fa-user-tie"></i> <span>Data Pengurus</span></a></li>
-@endif
-
+@section('navigasi')
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
+    <li class="breadcrumb-item text-sm"><a class="opacity-5 text-white" href="javascript:;">Pages</a></li>
+    <li class="breadcrumb-item text-sm text-white active" aria-current="page">Dashboard</li>
+  </ol>
+  <h6 class="font-weight-bolder text-white mb-0">Dashboard</h6>
+</nav>
 @stop
 @section('content')
-  <section class="section">
-    <div class="section-header">
-      <h1>Dashboard</h1>
-    </div>
-    <div class="row">
-      <div class="col-lg-3 col-md-6 col-sm-6 col-12">
-        <div class="card card-statistic-1">
-          <div class="card-icon bg-primary">
-            <i class="fas fa-home"></i>
-          </div>
-          <div class="card-wrap">
-            <div class="card-header">
-              <h4>Total Outlet</h4>
-            </div>
-            <div class="card-body">
-              {{ $outlet->count() }}
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-3 col-md-6 col-sm-6 col-12">
-        <div class="card card-statistic-1">
-          <div class="card-icon bg-danger">
-            <i class="far fa-user"></i>
-          </div>
-          <div class="card-wrap">
-            <div class="card-header">
-              <h4>Total Member</h4>
-            </div>
-            <div class="card-body">
-              {{ $member->count() }}
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-3 col-md-6 col-sm-6 col-12">
-        <div class="card card-statistic-1">
-          <div class="card-icon bg-warning">
-            <i class="fas fa-box"></i>
-          </div>
-          <div class="card-wrap">
-            <div class="card-header">
-              <h4>Total Paket</h4>
-            </div>
-            <div class="card-body">
-              {{ $paket->count() }}
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-3 col-md-6 col-sm-6 col-12">
-        <div class="card card-statistic-1">
-          <div class="card-icon bg-success">
-            <i class="fas fa-file-invoice-dollar"></i>
-          </div>
-          <div class="card-wrap ">
-            <div class="card-header">
-              <h4>Proses Pesanan</h4>
-            </div>
-            <div class="card-body">
-              {{ $transaksi->count() }}
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-lg-8 col-md-12 col-12 col-sm-12">
-        <div class="card">
-          <div class="card-header">
-            <h4>Statistics</h4>
-            <div class="card-header-action">
-              <div class="btn-group">
-                <a href="#" class="btn btn-primary">Week</a>
-                <a href="#" class="btn">Month</a>
-              </div>
-            </div>
-          </div>
-          <div class="card-body">
-            <canvas id="myChart" height="182"></canvas>
-            <div class="statistic-details mt-sm-4">
-              <div class="statistic-details-item">
-                <span class="text-muted"><span class="text-primary"><i class="fas fa-caret-up"></i></span> 7%</span>
-                <div class="detail-value">$243</div>
-                <div class="detail-name">Today's Sales</div>
-              </div>
-              <div class="statistic-details-item">
-                <span class="text-muted"><span class="text-danger"><i class="fas fa-caret-down"></i></span> 23%</span>
-                <div class="detail-value">$2,902</div>
-                <div class="detail-name">This Week's Sales</div>
-              </div>
-              <div class="statistic-details-item">
-                <span class="text-muted"><span class="text-primary"><i class="fas fa-caret-up"></i></span>9%</span>
-                <div class="detail-value">$12,821</div>
-                <div class="detail-name">This Month's Sales</div>
-              </div>
-              <div class="statistic-details-item">
-                <span class="text-muted"><span class="text-primary"><i class="fas fa-caret-up"></i></span> 19%</span>
-                <div class="detail-value">$92,142</div>
-                <div class="detail-name">This Year's Sales</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-4 col-md-12 col-12 col-sm-12">
-        <div class="card">
-          <div class="card-header">
-            <h4>Recent Activities</h4>
-          </div>
-          <div class="card-body">
-            <ul class="list-unstyled list-unstyled-border">
-              <li class="media">
-                <img class="mr-3 rounded-circle" width="50" src="../assets/img/avatar/avatar-1.png" alt="avatar">
-                <div class="media-body">
-                  <div class="float-right text-primary">Now</div>
-                  <div class="media-title">Farhan A Mujib</div>
-                  <span class="text-small text-muted">Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin.</span>
+
+    <div class="container-fluid py-4">
+      <div class="row">
+        <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+          <div class="card">
+            <div class="card-body p-3">
+              <div class="row">
+                <div class="col-8">
+                  <div class="numbers">
+                    <p class="text-sm mb-0 text-uppercase font-weight-bold">Total Outlet</p>
+                    <h5 class="font-weight-bolder">
+                      {{$outlet->count()}}
+                    </h5>
+                  </div>
                 </div>
-              </li>
-              <li class="media">
-                <img class="mr-3 rounded-circle" width="50" src="../assets/img/avatar/avatar-2.png" alt="avatar">
-                <div class="media-body">
-                  <div class="float-right">12m</div>
-                  <div class="media-title">Ujang Maman</div>
-                  <span class="text-small text-muted">Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin.</span>
+                <div class="col-4 text-end">
+                  <div class="icon icon-shape bg-gradient-danger shadow-danger text-center rounded-circle">
+                    <i class="ni ni-world text-lg opacity-10" aria-hidden="true"></i>
+                  </div>
                 </div>
-              </li>
-              <li class="media">
-                <img class="mr-3 rounded-circle" width="50" src="../assets/img/avatar/avatar-3.png" alt="avatar">
-                <div class="media-body">
-                  <div class="float-right">17m</div>
-                  <div class="media-title">Rizal Fakhri</div>
-                  <span class="text-small text-muted">Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin.</span>
-                </div>
-              </li>
-              <li class="media">
-                <img class="mr-3 rounded-circle" width="50" src="../assets/img/avatar/avatar-4.png" alt="avatar">
-                <div class="media-body">
-                  <div class="float-right">21m</div>
-                  <div class="media-title">Alfa Zulkarnain</div>
-                  <span class="text-small text-muted">Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin.</span>
-                </div>
-              </li>
-            </ul>
-            <div class="text-center pt-1 pb-1">
-              <a href="#" class="btn btn-primary btn-lg btn-round">
-                View All
-              </a>
+              </div>
             </div>
           </div>
         </div>
+        <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+          <div class="card">
+            <div class="card-body p-3">
+              <div class="row">
+                <div class="col-8">
+                  <div class="numbers">
+                    <p class="text-sm mb-0 text-uppercase font-weight-bold">Total Member</p>
+                    <h5 class="font-weight-bolder">
+                      {{$member->count()}}
+                    </h5>
+                  </div>
+                </div>
+                <div class="col-4 text-end">
+                  <div class="icon icon-shape bg-gradient-success shadow-success text-center rounded-circle">
+                    <i class="ni ni-paper-diploma text-lg opacity-10" aria-hidden="true"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+          <div class="card">
+            <div class="card-body p-3">
+              <div class="row">
+                <div class="col-8">
+                  <div class="numbers">
+                    <p class="text-sm mb-0 text-uppercase font-weight-bold">Total Paket</p>
+                    <h5 class="font-weight-bolder">
+                      {{$paket->count()}}
+                    </h5>
+
+                  </div>
+                </div>
+                <div class="col-4 text-end">
+                  <div class="icon icon-shape bg-gradient-primary shadow-primary text-center rounded-circle">
+                    <i class="ni ni-money-coins text-lg opacity-10" aria-hidden="true"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-3 col-sm-6">
+          <div class="card">
+            <div class="card-body p-3">
+              <div class="row">
+                <div class="col-8">
+                  <div class="numbers">
+                    <p class="text-sm mb-0 text-uppercase font-weight-bold">Proses Pesanan</p>
+                    <h5 class="font-weight-bolder">
+                      {{$transaksi->count()}}
+                    </h5>
+                  </div>
+                </div>
+                <div class="col-4 text-end">
+                  <div class="icon icon-shape bg-gradient-warning shadow-warning text-center rounded-circle">
+                    <i class="ni ni-cart text-lg opacity-10" aria-hidden="true"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+        <div class="col-lg-5">
+          <div class="card card-carousel overflow-hidden h-100 p-0">
+            <div id="carouselExampleCaptions" class="carousel slide h-100" data-bs-ride="carousel">
+              <div class="carousel-inner border-radius-lg h-100">
+                <div class="carousel-item h-100 active" style="background-image: url('../assets2/img/carousel-1.jpg');
+      background-size: cover;">
+                  <div class="carousel-caption d-none d-md-block bottom-0 text-start start-0 ms-5">
+                    <div class="icon icon-shape icon-sm bg-white text-center border-radius-md mb-3">
+                      <i class="ni ni-camera-compact text-dark opacity-10"></i>
+                    </div>
+                    <h5 class="text-white mb-1">Get started with Argon</h5>
+                    <p>There’s nothing I really wanted to do in life that I wasn’t able to get good at.</p>
+                  </div>
+                </div>
+                <div class="carousel-item h-100" style="background-image: url('../assets2/img/carousel-2.jpg');
+      background-size: cover;">
+                  <div class="carousel-caption d-none d-md-block bottom-0 text-start start-0 ms-5">
+                    <div class="icon icon-shape icon-sm bg-white text-center border-radius-md mb-3">
+                      <i class="ni ni-bulb-61 text-dark opacity-10"></i>
+                    </div>
+                    <h5 class="text-white mb-1">Faster way to create web pages</h5>
+                    <p>That’s my skill. I’m not really specifically talented at anything except for the ability to learn.</p>
+                  </div>
+                </div>
+                <div class="carousel-item h-100" style="background-image: url('../assets2/img/carousel-3.jpg');
+      background-size: cover;">
+                  <div class="carousel-caption d-none d-md-block bottom-0 text-start start-0 ms-5">
+                    <div class="icon icon-shape icon-sm bg-white text-center border-radius-md mb-3">
+                      <i class="ni ni-trophy text-dark opacity-10"></i>
+                    </div>
+                    <h5 class="text-white mb-1">Share with us your design tips!</h5>
+                    <p>Don’t be afraid to be wrong because you can’t learn anything from a compliment.</p>
+                  </div>
+                </div>
+              </div>
+              <button class="carousel-control-prev w-5 me-3" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+              </button>
+              <button class="carousel-control-next w-5 me-3" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
       </div>
     </div>
-  </section>
 @stop
 
 
