@@ -84,7 +84,7 @@
                                     <a href=" {{route('tampil-detail',$data->id_transaksi)}}" class="btn btn-icon btn-success" ><i class="fas fa-eye"></i><a>
                                       @if (auth()->user()->role != "owner") 
                                     <a href="{{route('edit-transaksi',$data->id)}}" class="btn btn-icon btn-success"><i class="far fa-edit"></i></a>
-                                    <a href= "#"data-id="{{$data->id}}" class="btn btn-icon btn-danger hapus"><i class="fas fa-fw fa-trash">
+                                    <a href= "#"data-id="{{$data->id}}" class="btn btn-icon btn-danger hapus"><i class="fas fa-times">
                                      <form action="{{route('hapus-transaksi',$data->id)}}" id="hapus{{$data->id}}"method="POST"> 
                                         @csrf
                                         @method('delete')
